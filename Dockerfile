@@ -1,4 +1,4 @@
-FROM       debian
+FROM       ubuntu
 
 COPY       entrypoint.sh /
 RUN        chmod a+x /entrypoint.sh
