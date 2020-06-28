@@ -4,9 +4,9 @@ inputs:
   head:
     description: Most recent repo reference
     required: true
-    default: "HEAD"
+    default: HEAD
   tail:
-    description: A prior repo reference to check for chnages from (empty default infers a prior tag or initial commit)
+    description: A prior repo reference to check for chnages from (empty default infers the previous tag or the initial commit)
     required: true
     default: ""
 outputs:
@@ -21,5 +21,5 @@ outputs:
   contributors:
     description: List of contributors (name and number of commits)
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile
