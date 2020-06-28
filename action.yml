@@ -19,7 +19,7 @@ outputs:
   files:
     description: List of files (change summary)
   contributors:
-    description: List of contributors (name)
+    description: List of contributors (name and number of commits)
 runs:
   using: 'docker'
   image: 'Dockerfile'
