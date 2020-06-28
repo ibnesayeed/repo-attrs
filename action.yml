@@ -1,11 +1,17 @@
 name: Repository Attributes
 description: Expose various attributes of a repository available as variables
 inputs:
-  range:
-    description: Repo history range to check for chnages
+  head:
+    description: Most recent repo reference
+    required: true
+    default: "HEAD"
+  tail:
+    description: A prior repo reference to check for chnages from (empty default infers a prior tag or initial commit)
     required: true
     default: ""
 outputs:
+  range:
+    description: Git range on which repo attrs were evaluated
   commits:
     description: List of commits (hashe and message)
   prs:
@@ -17,5 +23,3 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.range }}
