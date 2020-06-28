@@ -23,3 +23,6 @@ outputs:
 runs:
   using: docker
   image: Dockerfile
+branding:
+  icon: tag
+  color: blue
