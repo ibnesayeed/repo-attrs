@@ -1,0 +1,21 @@
+name: Repository Attributes
+description: Expose various attributes of a repository available as variables
+inputs:
+  range:
+    description: Repo history range to check for chnages
+    required: true
+    default: ""
+outputs:
+  commits:
+    description: List of commits (hashe and message)
+  prs:
+    description: List of pull requests (number and title)
+  files:
+    description: List of files (change summary)
+  contributors:
+    description: List of contributors (name)
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.range }}
