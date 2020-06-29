@@ -47,8 +47,6 @@ List of contributors (name and number of commits).
 
 ## Example Usage
 
-
-
 ```yml
 on:
   push:
