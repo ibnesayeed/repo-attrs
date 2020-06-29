@@ -6,7 +6,7 @@ It is intended to be used with other actions such as [Create a Release](https://
 
 ## Inputs
 
-Many attributes are extracted from a range of Git history `$tail..$head`.
+Many attributes are extracted from the range of Git history `$tail..$head`.
 
 ### `head`
 
@@ -22,27 +22,27 @@ The action sets up various output variables to be utilized in any succeeding ste
 
 ### `head`
 
-Evaluated most recent repo reference
+Evaluated most recent repo reference.
 
 ### `tail`
 
-Evaluated previous reference
+Evaluated previous reference.
 
 ### `commits`
 
-List of commits (hashe and message)
+List of commits (hash and message).
 
 ### `prs`
 
-List of pull requests (number and title)
+List of pull requests (number and title).
 
 ### `files`
 
-List of files (change summary)
+Summary of changed files.
 
 ### `contributors`
 
-List of contributors (name and number of commits)
+List of contributors (name and number of commits).
 
 
 ## Example Usage
@@ -77,7 +77,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          # Utilize extracted attributes from teh previous step
+          # Utilize extracted attributes from the previous step
           body: |
             ## Changes in this Release
             History range `${{steps.attrs.outputs.range}}`
