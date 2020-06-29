@@ -10,7 +10,7 @@ Many attributes are extracted from the range of Git history `$tail..$head`.
 
 ### `head`
 
-Most recent repo reference (default: `HEAD`).
+Most recent repo reference (empty default infers `HEAD` or a tag pointing to the head).
 
 ### `tail`
 

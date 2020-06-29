@@ -4,7 +4,7 @@ inputs:
   head:
     description: Most recent repo reference
     required: true
-    default: HEAD
+    default: ""
   tail:
     description: A prior repo reference to check for chnages from (empty default infers the previous tag or the initial commit)
     required: true
