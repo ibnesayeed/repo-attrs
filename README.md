@@ -20,9 +20,13 @@ A prior repo reference to check for chnages from (empty default infers the previ
 
 The action sets up various output variables to be utilized in any succeeding steps.
 
-### `range`
+### `head`
 
-Git range on which repo attrs were evaluated
+Evaluated most recent repo reference
+
+### `tail`
+
+Evaluated previous reference
 
 ### `commits`
 
@@ -75,15 +79,15 @@ jobs:
           release_name: Release ${{ github.ref }}
           # Utilize extracted attributes from teh previous step
           body: |
-            # Changes in this Release
+            ## Changes in this Release
             History range `${{steps.attrs.outputs.range}}`
-            ## Commits
+            ### Commits
             ${{steps.attrs.outputs.commits}}
-            ## Commits
-            ${{steps.attrs.outputs.commits}}
-            ## PRs
+            ### Pull Requests
             ${{steps.attrs.outputs.prs}}
-            ## Files
+            ### Contributors
+            ${{steps.attrs.outputs.contributors}}
+            ### Files
             ```
             ${{steps.attrs.outputs.files}}
             ```

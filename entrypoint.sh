@@ -7,16 +7,20 @@ function escapify {
     echo $res
 }
 
-DEAFULT_HEAD="@"
+THIS_TAG=$(git tag --points-at HEAD)
+DEAFULT_HEAD=${THIS_TAG:-@}
+
 INITIAL_COMMIT=$(git rev-list --max-parents=0 @)
 read last prev <<< $(git tag | tail -2 | tac | paste - -)
-PREV_TAG=$( [ -z $(git tag --points-at HEAD) ] && echo $last || echo $prev )
+PREV_TAG=$( [ -z $THIS_TAG ] && echo $last || echo $prev )
 DEAFULT_TAIL=${PREV_TAG:-$INITIAL_COMMIT}
 
 HEAD=${INPUT_HEAD:-$DEAFULT_HEAD}
 TAIL=${INPUT_TAIL:-$DEAFULT_TAIL}
 RANGE=$TAIL..$HEAD
-echo ::set-output name=range::$RANGE
+
+echo ::set-output name=head::$HEAD
+echo ::set-output name=tail::$TAIL
 
 commits=$(git log $RANGE --oneline | grep -v "Merge pull request" | awk '{print "- "$0}')
 echo ::set-output name=commits::$(escapify "$commits")

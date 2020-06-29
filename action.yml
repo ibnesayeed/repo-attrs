@@ -10,8 +10,10 @@ inputs:
     required: true
     default: ""
 outputs:
-  range:
-    description: Git range on which repo attrs were evaluated
+  head:
+    description: Evaluated most recent repo reference
+  tail:
+    description: Evaluated previous reference
   commits:
     description: List of commits (hashe and message)
   prs:
