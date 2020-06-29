@@ -5,7 +5,7 @@ function escapify {
     local res="${1//'%'/'%25'}"
     res="${res//$'\n'/'%0A'}"
     res="${res//$'\r'/'%0D'}"
-    echo $res
+    echo "$res"
 }
 
 # If the head is tagged then use that tag otherwise @ to reference it as the default.
@@ -24,17 +24,21 @@ HEAD=${INPUT_HEAD:-$DEAFULT_HEAD}
 TAIL=${INPUT_TAIL:-$DEAFULT_TAIL}
 RANGE=$TAIL..$HEAD
 
-echo ::set-output name=head::$HEAD
-echo ::set-output name=tail::$TAIL
+echo "::set-output name=head::$HEAD"
+echo "::set-output name=tail::$TAIL"
 
 commits=$(git log $RANGE --oneline | grep -v "Merge pull request" | awk '{print "- "$0}')
-echo ::set-output name=commits::$(escapify "$commits")
+commits=$(escapify "$commits")
+echo "::set-output name=commits::$commits"
 
 prs=$(git log --format="%s %b" $RANGE | grep "Merge pull request" | cut -d' ' -f4,7- | awk '{print "- "$0}')
-echo ::set-output name=prs::$(escapify "$prs")
+prs=$(escapify "$prs")
+echo "::set-output name=prs::$prs"
 
 files=$(git diff --stat $RANGE)
-echo ::set-output name=files::$(escapify "$files")
+files=$(escapify "$files")
+echo "::set-output name=files::$files"
 
 contributors=$(git log --format="%an: %s" $RANGE | grep -v "Merge pull request" | cut -d":" -f1 | tr ' ' '#' | sort | uniq -c | sort -nr | awk '{print "- "$2" ("$1" commits)"}' | tr '#' ' ')
-echo ::set-output name=contributors::$(escapify "$contributors")
+contributors=$(escapify "$contributors")
+echo "::set-output name=contributors::$contributors"
