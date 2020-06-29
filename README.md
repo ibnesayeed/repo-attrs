@@ -78,15 +78,24 @@ jobs:
           # Utilize extracted attributes from the previous step
           body: |
             ## Changes in this Release
-            History range `${{steps.attrs.outputs.range}}`
+
+            History from `${{ steps.attrs.outputs.tail }}` to `${{ steps.attrs.outputs.head }}`
+
             ### Commits
-            ${{steps.attrs.outputs.commits}}
+
+            ${{ steps.attrs.outputs.commits }}
+
             ### Pull Requests
-            ${{steps.attrs.outputs.prs}}
+
+            ${{ steps.attrs.outputs.prs }}
+
             ### Contributors
-            ${{steps.attrs.outputs.contributors}}
+
+            ${{ steps.attrs.outputs.contributors }}
+
             ### Files
+
             ```
-            ${{steps.attrs.outputs.files}}
+            ${{ steps.attrs.outputs.files }}
             ```
 ```
