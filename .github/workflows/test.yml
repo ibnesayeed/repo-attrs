@@ -17,4 +17,4 @@ jobs:
         uses: ./
       - name: Report Extracted Attrs
         run: |
-          echo ${{ steps.attrs.outputs.range }}
+          echo Changes between ${{ steps.attrs.outputs.tail }} and ${{ steps.attrs.outputs.head }}
