@@ -15,7 +15,7 @@ DEAFULT_HEAD=${THIS_TAG:-@}
 # If the head is tagged, then use the second last tag, otherwise the last tag.
 # If only the head is tagged or no tags are present, then use the initial commit reference.
 INITIAL_COMMIT=$(git rev-list --max-parents=0 @)
-read last prev <<< $(git tag --sort=-taggerdate | head -2 | paste - -)
+read last prev <<< $(git tag --sort=-committerdate | head -2 | paste - -)
 PREV_TAG=$( [ -z $THIS_TAG ] && echo $last || echo $prev )
 DEAFULT_TAIL=${PREV_TAG:-$INITIAL_COMMIT}
 
