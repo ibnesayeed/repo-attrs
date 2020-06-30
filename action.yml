@@ -6,7 +6,7 @@ inputs:
     required: true
     default: ""
   tail:
-    description: A prior repo reference to check for chnages from (empty default infers the previous tag or the initial commit)
+    description: A prior repo reference to check for changes from (empty default infers the previous tag or the initial commit)
     required: true
     default: ""
 outputs:
@@ -15,7 +15,7 @@ outputs:
   tail:
     description: Evaluated previous reference
   commits:
-    description: List of commits (hashe and message)
+    description: List of commits (hash and message)
   prs:
     description: List of pull requests (number and title)
   files:
