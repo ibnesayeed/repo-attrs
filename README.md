@@ -14,7 +14,7 @@ Most recent repo reference (empty default infers `HEAD` or a tag pointing to the
 
 ### `tail`
 
-A prior repo reference to check for chnages from (empty default infers the previous tag or the initial commit).
+A prior repo reference to check for changes from (empty default infers the previous tag or the initial commit).
 
 ## Outputs
 
