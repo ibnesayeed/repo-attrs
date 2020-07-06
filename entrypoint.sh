@@ -27,11 +27,11 @@ RANGE=$TAIL..$HEAD
 echo "::set-output name=head::$HEAD"
 echo "::set-output name=tail::$TAIL"
 
-commits=$(git log $RANGE --oneline | grep -v "Merge pull request" | awk '{print "- "$0}')
+commits=$(git log $RANGE --no-merges --oneline | awk '{print "- "$0}')
 commits=$(escapify "$commits")
 echo "::set-output name=commits::$commits"
 
-prs=$(git log --format="%s %b" $RANGE | grep "Merge pull request" | cut -d' ' -f4,7- | awk '{print "- "$0}')
+prs=$(git log --format="%s %b" --merges $RANGE | cut -d' ' -f4,7- | awk '{print "- "$0}')
 prs=$(escapify "$prs")
 echo "::set-output name=prs::$prs"
 
@@ -39,6 +39,8 @@ files=$(git diff --stat $RANGE)
 files=$(escapify "$files")
 echo "::set-output name=files::$files"
 
-contributors=$(git log --format="%an: %s" $RANGE | grep -v "Merge pull request" | cut -d":" -f1 | tr ' ' '#' | sort | uniq -c | sort -nr | awk '{print "- "$2" ("$1" commits)"}' | tr '#' ' ')
+authors=$(git log --format="%an" --no-merges $RANGE)
+coauthors=$(git log --format="%(trailers)" --no-merges $RANGE | grep -oP "Co-authored-by: \K.+(?= <)")
+contributors=$(echo -e "$authors\n$coauthors" | grep -v "\[bot\]" | tr ' ' '#' | sort | uniq -c | sort -nr | awk '{print "- "$2" ("$1" commits)"}' | tr '#' ' ')
 contributors=$(escapify "$contributors")
 echo "::set-output name=contributors::$contributors"
