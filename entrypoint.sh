@@ -41,6 +41,6 @@ echo "::set-output name=files::$files"
 
 authors=$(git log --format="%an" --no-merges $RANGE)
 coauthors=$(git log --format="%(trailers)" --no-merges $RANGE | grep -oP "Co-authored-by: \K.+(?= <)")
-contributors=$(echo -e "$authors\n$coauthors" | grep -v "\[bot\]" | tr ' ' '#' | sort | uniq -c | sort -nr | awk '{print "- "$2" ("$1" commits)"}' | tr '#' ' ')
+contributors=$(echo -e "$authors\n$coauthors" | sed '/^$/d' | grep -v "\[bot\]" | tr ' ' '#' | sort | uniq -c | sort -nr | awk '{print "- "$2" ("$1" commits)"}' | tr '#' ' ')
 contributors=$(escapify "$contributors")
 echo "::set-output name=contributors::$contributors"
