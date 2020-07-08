@@ -31,7 +31,7 @@ commits=$(git log $RANGE --no-merges --oneline | awk '{print "- "$0}')
 commits=$(escapify "$commits")
 echo "::set-output name=commits::$commits"
 
-prs=$(git log --format="%s %b" --merges $RANGE | cut -d' ' -f4,7- | awk '{print "- "$0}')
+prs=$(git log --format="%s %b" --merges $RANGE | grep "Merge pull request #" | cut -d' ' -f4,6- | awk '{print "- "$0}')
 prs=$(escapify "$prs")
 echo "::set-output name=prs::$prs"
 
